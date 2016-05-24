@@ -2,7 +2,7 @@
   <div>
     <input type="file" name="input-file" id="input-file" accept="image/*" @change="fileInputChange">        
     <div v-if="!isCompleted" id="upload-form" class="block-center col-lg-offset-1 col-lg-10" @click="selectPhoto">
-      <div v-if="!inProgress">>Select your photo...</div>
+      <div v-if="!inProgress">Select your photo...</div>
       <div v-if="inProgress">{{progress}}%</div>
     </div>
     <div v-if="imageUrl" class="row">
