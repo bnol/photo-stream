@@ -50,19 +50,9 @@ module.exports = {
 
         Tracker.autorun(() => {      
           
-          this.photos = Photos.find({}, {sort: {createdAt: -1}}).fetch();
-          
-          var userIds = [];
+          this.photos = Photos.find({}, {sort: {createdAt: -1}}).fetch();   
 
-          this.photos.forEach(function(photo) {
-            photo.comments.forEach(function(comment) {      
-              if (!~userIds.indexOf(comment.userId)) {
-                userIds.push(comment.userId);
-              }          
-            })
-          });      
-
-          Meteor.call('getUsersById', userIds, (error, result) => {        
+          Meteor.call('getUsers', (error, result) => {        
             var users = {};        
             result.forEach(user => {                 
               users[user._id] = {
