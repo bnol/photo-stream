@@ -1,9 +1,9 @@
 <template>
   <div>
     <input type="file" name="input-file" id="input-file" accept="image/*" @change="fileInputChange">        
-    <div v-if="!isCompleted" id="upload-form" class="block-center col-lg-offset-1 col-lg-10">
-      <input v-if="!inProgress" type="button" class="btn btn-success btn-lg" @click="selectPhoto" value="Select your awesome photo">
-      <div v-if="inProgress" id="upload-progress">{{progress}}%</div>
+    <div v-if="!isCompleted" id="upload-form" class="block-center col-lg-offset-1 col-lg-10" @click="selectPhoto">
+      <div>Select your photo...</div>
+      <div v-if="inProgress">{{progress}}%</div>
     </div>
     <div v-if="imageUrl" class="row">
       <form @submit.prevent="addPhoto">
@@ -27,10 +27,6 @@
   #input-file {
     visibility: hidden;
   }  
-  #upload-progress {
-    font-family: 'Lobster', cursive;
-    font-size: 50px;
-  }
   
   #uploaded-image {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -51,6 +47,9 @@
     justify-content: center;
     /*background: url(data:image/gif;base64,R0lGODlhCgAKAIAAAOLi4v///yH5BAAHAP8ALAAAAAAKAAoAAAIRhB2ZhxoM3GMSykqd1VltzxQAOw==);*/
     background: #e5e5e5;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    cursor: pointer;
   }
 </style>
 <script>
