@@ -1,2 +1,2 @@
 # photo-stream
-Realtime photo stream app with Meteor, Vue and Webpack
+Real-time photo stream app built with Meteor, Vue, MongoDB and Webpack
