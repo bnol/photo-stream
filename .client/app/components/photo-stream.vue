@@ -5,7 +5,7 @@
         <div>
         <span class="glyphicon glyphicon-time"></span>
         Posted by <strong>{{getUserById(photo.createdBy).fullname}}</strong> - <span v-text="photo.createdAt | moment 'calendar' | lowercase "></span> 
-        <a @click="removePhoto(photo._id)" href="javascript:;" v-if="photo.createdBy == userId">(delete)</a>
+        <a @click="removePhoto(photo._id)" href="javascript:;" v-if="photo.createdBy == user._id">(delete)</a>
         </div>
         <img :src="photo.url" class="img-responsive center-block">
         <div v-if="photo.caption" class="text-center">
@@ -23,9 +23,9 @@ import CommentBox from './comment-box.vue'
 import LikeBox from './like-box.vue'
 
 module.exports = {    
+    props: ['user'],
     data: function () {
-        return {
-            userId: Meteor.userId(),
+        return {            
             users: {},
             photos: [],
         }

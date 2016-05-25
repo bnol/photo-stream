@@ -15,7 +15,7 @@
         </div>                
       </article>
     </div>    
-    <photo-stream></photo-stream>
+    <photo-stream :user="user"></photo-stream>
   </div>
 </template>
 
@@ -86,7 +86,7 @@ module.exports = {
     logout: function() {      
         Meteor.logout(() => {        
           this.userId = null;
-          this.user = { profile: {} };
+          this.user = {};
         });      
     }
   },
@@ -102,7 +102,7 @@ module.exports = {
     Tracker.autorun(() => {
 
       const user = Meteor.user();
-
+      
       if (user) {
         this.user = {
           _id: Meteor.userId(),
@@ -146,6 +146,7 @@ article {
   h1, h2 {
     margin-top: 0px;
     font-family: 'Lobster', cursive;
+    text-shadow: 2px 2px #CCC;
   }  
 }
 
@@ -157,9 +158,21 @@ article {
   }
 }
 
-@media only screen and (max-width: 1200px) {
-  .btn {
+@media only screen and (max-width: 1024px) {
+  
+}
+
+@media only screen and (max-width: 768px) {
+  article {
+    padding: 15px !important;
+  }
+
+  .btn-responsive {
     width: 100% !important;
+  }
+  
+  img.center-block {    
+    border: 5px solid #fff;    
   }
 }
 

@@ -2,20 +2,20 @@
   <div>
     <input type="file" name="input-file" id="input-file" accept="image/*" @change="fileInputChange">        
     <div v-if="!isCompleted" id="upload-form" class="block-center col-lg-offset-1 col-lg-10" @click="selectPhoto">
-      <div v-if="!inProgress">Select your photo...</div>
+      <div v-if="!inProgress">Select photo</div>
       <div v-if="inProgress">{{progress}}%</div>
     </div>
     <div v-if="imageUrl" class="row">
-      <form @submit.prevent="addPhoto">
+      <form @submit.prevent="addPhoto" style="padding: 15px">
         <img id="uploaded-image" :src="imageUrl" class="img-responsive center-block" @click="selectPhoto"/>
         <div class="form-group">
-          <label class="col-lg-12">Title: <input class="form-control" type="text" placeholder="title of your post..." v-model="title" required></label>
+          <label style="width: 100%">Title: <input class="form-control" type="text" placeholder="title of your post..." v-model="title" required></label>
         </div>
         <div class="form-group">
-          <label class="col-lg-12">Caption (optional): <textarea class="form-control" type="text" placeholder="write something about your photo..." v-model="caption" rows="3"></textarea></label>
+          <label style="width: 100%">Caption (optional): <textarea class="form-control" type="text" placeholder="write something about your photo..." v-model="caption" rows="3"></textarea></label>
         </div>
         <div class="form-group center-block">
-          <label class="col-lg-12">
+          <label style="width: 100%">
             <button type="button" class="btn btn-link pull-right" @click="closeForm">Cancel</button>
             <button type="submit" class="btn btn-success pull-right">Post photo</button>            
           </label>          
@@ -36,20 +36,23 @@
     cursor: pointer;
   }
 
-  #upload-form {
-    height: 400px;
+  #upload-form {    
+    padding-top: 30px;
+    padding-bottom: 30px;
+    min-height: 300px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     border: 10px solid #fff;
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    /*background: url(data:image/gif;base64,R0lGODlhCgAKAIAAAOLi4v///yH5BAAHAP8ALAAAAAAKAAoAAAIRhB2ZhxoM3GMSykqd1VltzxQAOw==);*/
+    justify-content: center;    
     background: #e5e5e5;
     font-family: 'Lobster', cursive;
     font-size: 50px;
     cursor: pointer;
+    line-height: 55px;
+    text-shadow: 2px 2px #ccc;
   }
 </style>
 <script>

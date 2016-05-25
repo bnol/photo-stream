@@ -22,10 +22,18 @@ module.exports = {
           return this.users[id] || {}
         },
         likePhoto: function(id) {
-          Meteor.call('likePhoto', id, swale)
+          Meteor.call('likePhoto', id, error => {
+            if (error) {
+              swale(error);
+            }
+          })
         },
         unlikePhoto: function(id) {
-          Meteor.call('unlikePhoto', id, swale)
+          Meteor.call('unlikePhoto', id, error => {
+            if (error) {
+              swale(error);
+            }
+          })
         }
     },
     computed: {

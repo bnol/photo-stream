@@ -12,7 +12,9 @@
           <label for="inputPassword2">Password</label>
           <input type="password" class="form-control" id="inputPassword2" placeholder="Password" name="password" v-model="password" required>
         </div>
-        <button type="submit" class="btn btn-success">Register</button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-responsive">Register</button>
+        </div>
     </form>
 </template>
 <script>

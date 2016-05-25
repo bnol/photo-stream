@@ -8,7 +8,9 @@
       <label for="inputPassword">Password</label>
       <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" v-model="password" required>
     </div>
-    <button type="submit" class="btn btn-success">Login</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-responsive">Login</button>
+    </div>
   </form>
 </template>
 <script>
