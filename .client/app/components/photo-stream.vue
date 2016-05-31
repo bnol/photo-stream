@@ -53,14 +53,22 @@ module.exports = {
           this.photos = Photos.find({}, {sort: {createdAt: -1}}).fetch();   
 
           Meteor.call('getUsers', (error, result) => {        
-            var users = {};        
-            result.forEach(user => {                 
-              users[user._id] = {
-                email: user.emails[0].address,
-                fullname: user.profile.fullname
-              }
-            });        
-            this.users = users;            
+            
+
+            if (result) {
+                
+                var users = {};
+                
+                result.forEach(user => {                 
+                  users[user._id] = {
+                    email: user.emails[0].address,
+                    fullname: user.profile.fullname
+                  }
+                });  
+
+                this.users = users;  
+            }  
+                      
           });      
 
         });

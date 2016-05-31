@@ -1,5 +1,5 @@
 <template>    
-    <form @submit.prevent="register(email, password, fullname)">
+    <form class="registration-form" @submit.prevent="register(email, password, fullname)">
         <div class="form-group">
           <label for="inputFullname2">Fullname</label>
           <input type="text" class="form-control" id="inputFullname2" placeholder="Fullname" name="fullname" v-model="fullname" required>

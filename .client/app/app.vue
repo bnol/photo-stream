@@ -103,7 +103,7 @@ module.exports = {
 
       const user = Meteor.user();
       
-      if (user) {
+      if (user && user.profile) {
         this.user = {
           _id: Meteor.userId(),
           fullname: user.profile.fullname,
