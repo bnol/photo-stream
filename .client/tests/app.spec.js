@@ -74,7 +74,7 @@ describe('App component', function() {
     })
   })
 
-  describe('Before login', function() {
+  describe('After login', function() {
     
     it('should display correct fullname', function(done) {
 
