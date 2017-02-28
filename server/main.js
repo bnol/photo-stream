@@ -1,7 +1,7 @@
 Meteor.startup(function() {
   UploadServer.init({
-    tmpDir: Meteor.settings.tmpDir || "/Work/photo-stream/server/.uploads/tmp",
-    uploadDir: Meteor.settings.uploadDir || "/Work/photo-stream/server/.uploads/",
+    tmpDir: Meteor.settings.tmpDir || "/Users/bnol/Workspace/me/photo-stream/server/.uploads/tmp",
+    uploadDir: Meteor.settings.uploadDir || "/Users/bnol/Workspace/me/photo-stream/server/.uploads/",
     checkCreateDirectories: true,
     acceptFileTypes: /.(gif|jpe?g|png)$/i,
     mimeTypes: {

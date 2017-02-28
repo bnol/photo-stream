@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="file" name="input-file" id="input-file" accept="image/*" @change="fileInputChange">        
+    <input type="file" name="input-file" id="input-file" accept="image/*" @change="fileInputChange">
     <div v-if="!isCompleted" id="upload-form" class="block-center col-lg-offset-1 col-lg-10" @click="selectPhoto">
       <div v-if="!inProgress">Select photo</div>
       <div v-if="inProgress">{{progress}}%</div>
@@ -17,8 +17,8 @@
         <div class="form-group center-block">
           <label style="width: 100%">
             <button type="button" class="btn btn-link pull-right" @click="closeForm">Cancel</button>
-            <button type="submit" class="btn btn-success pull-right">Post photo</button>            
-          </label>          
+            <button type="submit" class="btn btn-success pull-right">Post photo</button>
+          </label>
         </div>
       </form>
     </div>
@@ -26,8 +26,8 @@
 <style>
   #input-file {
     visibility: hidden;
-  }  
-  
+  }
+
   #uploaded-image {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     border: 10px solid #fff;
@@ -36,7 +36,7 @@
     cursor: pointer;
   }
 
-  #upload-form {    
+  #upload-form {
     padding-top: 30px;
     padding-bottom: 30px;
     min-height: 300px;
@@ -46,7 +46,7 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     background: #e5e5e5;
     font-family: 'Lobster', cursive;
     font-size: 50px;
@@ -72,14 +72,14 @@
     };
   }
 
-  module.exports = {    
+  module.exports = {
     data: initialState,
     methods: {
       selectPhoto: function() {
         document.getElementById(this.id).click();
       },
       addPhoto: function () {
-        
+
         if (!this.title.trim()) {
            return swale({
             reason: 'Title may not be empty.'
@@ -92,14 +92,14 @@
            });
         }
 
-        Meteor.call('addPhoto', this.title, this.caption, this.imageUrl, (error) => {            
+        Meteor.call('addPhoto', this.title, this.caption, this.imageUrl, (error) => {
           if (error) {
             return swale(error);
           }
 
           this.closeForm();
 
-        });             
+        });
 
       },
       closeForm: function() {
@@ -110,18 +110,18 @@
         // get the group of files assigned to this field
         var ident = this.id || this.name
         this.myFiles = document.getElementById(ident).files;
-        this.fileUpload();        
+        this.fileUpload();
       },
       _onProgress: function(e) {
         // this is an internal call in XHR to update the progress
-        e.percent = (e.loaded / e.total) * 100;        
-        this.progress = Math.floor(e.percent);        
+        e.percent = (e.loaded / e.total) * 100;
+        this.progress = Math.floor(e.percent);
       },
       _handleUpload: function(file) {
         var form = new FormData();
         var xhr = new XMLHttpRequest();
         try {
-          form.append('Content-Type', file.type || 'application/octet-stream');          
+          form.append('Content-Type', file.type || 'application/octet-stream');
           // our request will have the file in the ['file'] key
           form.append('file', file);
         } catch (err) {
@@ -137,13 +137,13 @@
             if (xhr.readyState < 4) {
               return;
             }
-            if (xhr.status < 400) {              
-              var res = JSON.parse(xhr.responseText);              
+            if (xhr.status < 400) {
+              var res = JSON.parse(xhr.responseText);
               resolve(res);
             } else {
               var err = JSON.parse(xhr.responseText);
               err.status = xhr.status;
-              err.statusText = xhr.statusText;              
+              err.statusText = xhr.statusText;
               reject(err);
             }
           }.bind(this);
@@ -151,7 +151,7 @@
           xhr.onerror = function() {
             var err = JSON.parse(xhr.responseText);
             err.status = xhr.status;
-            err.statusText = xhr.statusText;            
+            err.statusText = xhr.statusText;
             reject(err);
           }.bind(this);
 
@@ -162,7 +162,7 @@
             }
           }
           xhr.send(form);
-         
+
         });
       },
       fileUpload: function() {
@@ -175,14 +175,14 @@
             return this._handleUpload(file);
           });
           // wait for everything to finish
-          Promise.all(arrayOfPromises).then(allFiles => {                
-            this.isCompleted = true;            
-            this.imageUrl = this.action + allFiles[0].files[0].path;
+          Promise.all(arrayOfPromises).then(allFiles => {
+            this.isCompleted = true;
+            this.imageUrl = [this.action, allFiles[0].files[0].path].join('/');
           }).catch(err => {
-            swale(err);            
+            swale(err);
           });
         } else {
-          // someone tried to upload without adding files          
+          // someone tried to upload without adding files
           swale(new Error("No files to upload for this field"));
         }
       }
